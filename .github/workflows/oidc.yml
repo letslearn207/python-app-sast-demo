@@ -8,23 +8,11 @@ permissions:
   id-token: write
 
 jobs:
-  debug-oidc:
-    name: Debug OIDC Claims
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Show OIDC claims
-        uses: github/actions-oidc-debugger@main
-        with:
-          audience: sts.amazonaws.com
-
   aws-identity:
-    name: Assume AWS Role
     runs-on: ubuntu-latest
-    needs: debug-oidc
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Configure AWS credentials
