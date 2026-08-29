@@ -1,0 +1,23 @@
+name: Least Privilege Demo
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Show repository
+        run: |
+          echo "Repository can be read"
+          ls -la
+      - name: Create test issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "Least privilege test" \
+            --body "Testing GitHub Actions permissions"
